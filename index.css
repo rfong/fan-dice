@@ -38,14 +38,14 @@ body[display-mode=minimal] .die, body[display-mode=pose] .die {
   height: 150px;
   width: 150px;
   margin: 20px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
   font-size: 40pt;
   font-weight: bold;
-  background-color: rgba(70, 156, 171, 0.7); }
+  background-color: rgba(70, 165, 185, 0.7); }
   body[display-mode=minimal] .die .die-content-wrapper, body[display-mode=pose] .die .die-content-wrapper {
     display: table;
     height: 100%;
