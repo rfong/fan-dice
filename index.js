@@ -11,8 +11,8 @@ app.controller('FansCtrl', function($scope, $http) {
   $scope.DICE_PARAMETERS = {
     // all must be unique
     relation: ['C', 'I', 'O', 'S', 'W', 'X'],
-    transition: ['static', 'extension', 'fold', 'spin + antispin', 'tracer',
-                 'glides + slides', 'isolation', 'stack'],
+    transition: ['isolation', 'spin / antispin', 'tracer', 'slide / glide',
+                 'stack', 'extension', 'fold', 'toss'],
     num_poses: {C: 6, I: 4, O: 5, S: 6, W: 6, X: 6},
   };
 
