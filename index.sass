@@ -1,0 +1,80 @@
+@import _mixins
+
+html
+  margin: 0
+  padding: 0
+
+body
+  position: relative
+  margin: 0
+  background-image: url('images/seigaiha.png')
+  background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(100, 100, 100, 0.2)), url('images/seigaiha.png')
+
+  padding-top: 2em
+  text-align: center
+  font-family: 'Helvetica Neue', Helvetica, sans-serif
+  +letterpress
+
+.dice
+  margin: 0 auto
+
+.die
+  position: relative
+  font-size: 40pt
+  font-weight: bold
+  width: auto
+
+  &.transition
+    font-size: 20pt
+
+    .die-content
+      padding: 0.5em
+      margin: 0.5em
+
+  &.relation
+    background: rgba(50,50,50,0.2)
+
+    img
+      height: 100px
+
+td:first-child
+  text-align: center
+
+
+.die-old
+  position: relative
+  //display: inline-block
+  height: 150px
+  width: 150px
+  margin: 20px
+  +border-radius(5px)
+  font-size: 40pt
+  font-weight: bold
+  background-color: #aaa
+
+  .die-content-wrapper
+    display: table
+    height: 100%
+    width: 100%
+
+    .die-content
+      display: table-cell
+      vertical-align: middle
+      text-align: center
+      overflow-wrap: break-word
+
+  &.transition
+    font-size: 18pt
+
+.button
+  +button
+  +transition(0.3s)
+  font-size: 30pt
+  width: 1em
+  background-color: #eadfbe
+  &:hover
+    +boxpress
+    background-color: #bda86a
+
+.footer
+  margin: 1em 0
