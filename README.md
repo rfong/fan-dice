@@ -12,6 +12,6 @@ Based on Becca Becker's [dice game](https://www.facebook.com/groups/109637431191
 + ~~pose mode~~
 + set uniqueness constraint on adjacent relations? (or maybe that's useful)
 + probably refactor to a onepage app so I can add more toggles
-+ clean up UI for five dice
++ clean up UI for larger number of dice
 + novice <-> combo toggle (1 vs 2 transitions)
 + make it mobile friendly
