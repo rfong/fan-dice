@@ -18,7 +18,7 @@ body
 .dice
   margin: 0 auto
 
-.die
+body[display-mode=full] .die
   position: relative
   font-size: 40pt
   font-weight: bold
@@ -37,13 +37,9 @@ body
     img
       height: 100px
 
-td:first-child
-  text-align: center
-
-
-.die-old
+body[display-mode=minimal] .die, body[display-mode=pose] .die
   position: relative
-  //display: inline-block
+  display: inline-block
   height: 150px
   width: 150px
   margin: 20px

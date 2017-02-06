@@ -1,6 +1,6 @@
-.DS_Store
-.sass-cache
-
-# Generated
 *.swp
 *.swo
+
+.DS_Store
+.sass-cache
+*.psd

@@ -18,23 +18,13 @@
   <script src="/index.js"></script>
 
 </head>
-<body display-mode="pose">
+<body display-mode="minimal">
 
   <div class="dice">
     <div ng-repeat="die in dice"
-         class="die {{die.type}}">
-      <div class="die-content">
-        <div ng-if="die.type=='transition'">
-          <i class="fa fa-arrow-down"></i>
-        </div>
-        {{die.content}}
-        <div ng-if="die.type=='transition'">
-          <i class="fa fa-arrow-down"></i>
-        </div>
-      </div>
-      <div class="die-image"
-           ng-if="die.type=='relation'">
-        <img src="{{getImageUrl(die.content)}}"/>
+          class="die {{die.type}}">
+      <div class="die-content-wrapper">
+        <div class="die-content">{{die.content}}</div>
       </div>
     </div>
   </div>
@@ -45,9 +35,9 @@
 
   <div class="footer">
     display modes:
-    <b>pose</b> |
+    <a href="/">pose</a> |
     <a href="/full">full</a> |
-    <a href="/minimal">minimal</b>
+    <b>minimal</b>
   </div>
 
   <div class="footer">

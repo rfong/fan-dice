@@ -11,6 +11,7 @@ app.controller('FansCtrl', function($scope, $http) {
     relation: ['C', 'I', 'O', 'S', 'W', 'X'],
     transition: ['static', 'extension', 'fold', 'spin + antispin', 'tracer',
                  'glides + slides', 'isolation', 'stack'],
+    num_poses: {C: 6, I: 4, O: 5, S: 6, W: 6, X: 6},
   };
 
   $scope.getDieType = function(die_name) {
@@ -34,7 +35,12 @@ app.controller('FansCtrl', function($scope, $http) {
   $scope.getImageUrl = function(relationName) {
     if (! _.contains($scope.DICE_PARAMETERS.relation, relationName))
       return null;
-    return 'images/relation_' + relationName + '.png';
+    if ($('body').attr('display-mode') == 'pose') {
+      return ('/images/relation_' + relationName +
+              _.random(1, $scope.DICE_PARAMETERS.num_poses[relationName]).toString()
+              + '.png');
+    }
+    return '/images/relation_' + relationName + '.png';
   };
 
   $scope.updateUrlParams = function() {
