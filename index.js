@@ -3,6 +3,8 @@ var app = angular.module('FansApp', []);
 
 app.controller('FansCtrl', function($scope, $http) {
 
+  $scope.baseURL = '/fan-dice';  // ultrajanky gh-pages hack
+
   $scope.dice = [];
   $scope.displayMode = $('body').attr('display-mode');
 
@@ -44,9 +46,9 @@ app.controller('FansCtrl', function($scope, $http) {
     if (! _.contains($scope.DICE_PARAMETERS.relation, relation))
       return null;
     if ($scope.displayMode == 'pose' && die.variant !== undefined) {
-      return ('/images/relation_' + relation + die.variant.toString() + '.png');
+      return ('/fan-dice/images/relation_' + relation + die.variant.toString() + '.png');
     }
-    return '/images/relation_' + relation+ '.png';
+    return '/fan-dice/images/relation_' + relation+ '.png';
   };
 
   $scope.updateUrlParams = function() {
