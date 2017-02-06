@@ -36,8 +36,8 @@ $red-lite: #ec957f
   -o-box-shadow:      inset $color $x $y $blur $spread
   box-shadow:         inset $color $x $y $blur $spread
 
-=letterpress
-  text-shadow: 1px 1px rgba(255,255,255,0.8)
+=letterpress($opacity:0.8)
+  text-shadow: 1px 1px rgba(255,255,255,$opacity)
 =boxpress
   +inset-box-shadow(rgba(0,0,0,0.3), 1px, 0, 1px, 1px)
 

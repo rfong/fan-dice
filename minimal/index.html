@@ -24,7 +24,15 @@
     <div ng-repeat="die in dice"
           class="die {{die.type}}">
       <div class="die-content-wrapper">
-        <div class="die-content">{{die.content}}</div>
+        <div class="die-content">
+          <div ng-if="die.type=='transition'">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+          {{die.content}}
+          <div ng-if="die.type=='transition'">
+            <i class="fa fa-arrow-right"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>

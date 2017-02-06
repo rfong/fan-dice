@@ -6,25 +6,27 @@ body {
   position: relative;
   margin: 0;
   background-image: url("images/seigaiha.png");
-  background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(100, 100, 100, 0.2)), url("images/seigaiha.png");
+  background: linear-gradient(rgba(216, 20, 0, 0.3), rgba(255, 152, 45, 0.3)), url("images/seigaiha.png");
   padding-top: 2em;
   text-align: center;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  text-shadow: 1px 1px rgba(255, 255, 255, 0.8); }
+  font-family: "Helvetica Neue", Helvetica, sans-serif; }
 
 .dice {
-  margin: 0 auto; }
+  margin: 0 auto;
+  text-shadow: 1px 1px rgba(255, 255, 255, 0.3); }
 
-body[display-mode=full] .die {
+.die {
   position: relative;
   font-size: 40pt;
-  font-weight: bold;
-  width: auto; }
-  body[display-mode=full] .die.transition {
+  font-weight: bold; }
+  .die.transition {
     font-size: 20pt; }
-    body[display-mode=full] .die.transition .die-content {
+    .die.transition .die-content {
       padding: 0.5em;
       margin: 0.5em; }
+
+body[display-mode=full] .die {
+  width: auto; }
   body[display-mode=full] .die.relation {
     background: rgba(50, 50, 50, 0.2); }
     body[display-mode=full] .die.relation img {
@@ -43,7 +45,7 @@ body[display-mode=minimal] .die, body[display-mode=pose] .die {
   border-radius: 5px;
   font-size: 40pt;
   font-weight: bold;
-  background-color: #aaa; }
+  background-color: rgba(70, 156, 171, 0.7); }
   body[display-mode=minimal] .die .die-content-wrapper, body[display-mode=pose] .die .die-content-wrapper {
     display: table;
     height: 100%;
@@ -55,6 +57,12 @@ body[display-mode=minimal] .die, body[display-mode=pose] .die {
       overflow-wrap: break-word; }
   body[display-mode=minimal] .die.transition, body[display-mode=pose] .die.transition {
     font-size: 18pt; }
+  body[display-mode=minimal] .die.relation img, body[display-mode=pose] .die.relation img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25%;
+    height: 150px; }
 
 .button {
   cursor: pointer;
@@ -85,13 +93,14 @@ body[display-mode=minimal] .die, body[display-mode=pose] .die {
   transition: 0.3s;
   font-size: 30pt;
   width: 1em;
-  background-color: #eadfbe; }
+  background-color: #ae91c3; }
   .button:hover {
     -moz-box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 1px 0;
     -webkit-box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 1px 0;
     -o-box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 1px 0;
     box-shadow: inset rgba(0, 0, 0, 0.3) 1px 1px 1px 0;
-    background-color: #bda86a; }
+    text-shadow: 1px 1px rgba(255, 255, 255, 0.3);
+    background-color: #82609a; }
 
 .footer {
   margin: 1em 0; }

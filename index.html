@@ -23,18 +23,20 @@
   <div class="dice">
     <div ng-repeat="die in dice"
          class="die {{die.type}}">
+      <div class="die-content-wrapper">
       <div class="die-content">
         <div ng-if="die.type=='transition'">
-          <i class="fa fa-arrow-down"></i>
+          <i class="fa fa-arrow-right"></i>
         </div>
         {{die.content}}
         <div ng-if="die.type=='transition'">
-          <i class="fa fa-arrow-down"></i>
+          <i class="fa fa-arrow-right"></i>
         </div>
+      </div>
       </div>
       <div class="die-image"
            ng-if="die.type=='relation'">
-        <img src="{{getImageUrl(die.content)}}"/>
+        <img src="{{getImageUrl(die)}}"/>
       </div>
     </div>
   </div>
