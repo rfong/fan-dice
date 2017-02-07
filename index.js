@@ -4,9 +4,18 @@ var app = angular.module('FansApp', []);
 app.controller('FansCtrl', function($scope, $http) {
 
   $scope.baseURL = '/fan-dice';  // ultrajanky gh-pages hack
-
+  
   $scope.dice = [];
-  $scope.displayMode = $('body').attr('display-mode');
+  $scope.DISPLAY_MODES = ['pose', 'minimal'];
+  $scope.displayMode = $scope.DISPLAY_MODES[0];
+
+  $scope.numTransitions = 2;
+  $scope.getDiceTypes = function() {
+    return _.reduce(
+      _.map(_.range($scope.numTransitions), function(t) {
+          return ['relation', 'transition'] }),
+      function(a, b) { return a.concat(b); }, []).concat('relation')
+  }
 
   $scope.DICE_PARAMETERS = {
     // all must be unique
@@ -24,17 +33,38 @@ app.controller('FansCtrl', function($scope, $http) {
     }
   };
 
+  $scope.changeNumTransitions = function(n) {
+    var prevN = $scope.numTransitions;
+    $scope.numTransitions = n;
+    if (n < prevN) {
+        $scope.dice = $scope.dice.slice(0, 2*n+1);
+    } else {
+        $scope.shuffle();
+    }
+  };
+
+  $scope.changeMode = function(mode) {
+    if (!_.contains($scope.DISPLAY_MODES, mode)) {
+        console.error('invalid mode', mode);
+        return;
+    }
+    $scope.displayMode = mode;
+    $scope.updateUrlParams();
+    $scope.initialize();
+  };
+
+  $scope.randomVariant = function(relation) {
+    return _.random(1, $scope.DICE_PARAMETERS.num_poses[relation]);
+  };
+
   $scope.shuffle = function(diceTypes) {
-    diceTypes = diceTypes || ['relation', 'transition', 'relation'];
+    diceTypes = diceTypes || $scope.getDiceTypes();
     $scope.dice = _.map(diceTypes, function(dtype) {
       var params = {
         type: dtype,
         content: _.sample($scope.DICE_PARAMETERS[dtype]),
       };
-      if ($scope.displayMode == 'pose') {
-        params.variant = _.random(
-          1, $scope.DICE_PARAMETERS.num_poses[params.content]);
-      }
+      params.variant = $scope.randomVariant(params.content);
       return params;
     });
     console.log("shuffled;", _.pluck($scope.dice, 'content'));
@@ -54,18 +84,22 @@ app.controller('FansCtrl', function($scope, $http) {
   $scope.updateUrlParams = function() {
     // Dump config to url params
     var dice_names = _.map($scope.dice, function(die) {
-      if ($scope.displayMode == 'pose' && die.variant !== undefined) {
+      if (die.variant !== undefined) {
         return die.content + ':' + die.variant.toString();
       }
       return die.content;
     });
-    window.urlparams.setUrlParams({dice: dice_names.join(',')});
+    window.urlparams.setUrlParams({
+        mode: $scope.displayMode,
+        dice: dice_names.join(',')
+    });
   };
 
   $scope.initialize = function() {
     // Load configuration from permalink, or shuffle if DNE
     try {
       var params = window.urlparams.getUrlParams();
+      $scope.displayMode = params.mode || $scope.DISPLAY_MODES[0];
     } catch (ex) {
       $scope.shuffle();
       return;
@@ -83,9 +117,11 @@ app.controller('FansCtrl', function($scope, $http) {
         }
         return {
           type: $scope.getDieType(die_name),
-          content: die_name
+          content: die_name,
+          variant: $scope.randomVariant(die_name),
         };
       });
+      $scope.updateUrlParams();
     }
     else {
       $scope.shuffle();

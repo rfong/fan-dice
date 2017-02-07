@@ -18,24 +18,24 @@
   <script src="index.js"></script>
 
 </head>
-<body display-mode="pose">
+<body display-mode="{{displayMode}}">
 
   <div class="dice">
     <div ng-repeat="die in dice"
          class="die {{die.type}}">
       <div class="die-content-wrapper">
       <div class="die-content">
-        <div ng-if="die.type=='transition'">
+        <div ng-if="die.type==='transition'">
           <i class="fa fa-arrow-right"></i>
         </div>
         {{die.content}}
-        <div ng-if="die.type=='transition'">
+        <div ng-if="die.type==='transition'">
           <i class="fa fa-arrow-right"></i>
         </div>
       </div>
       </div>
       <div class="die-image"
-           ng-if="die.type=='relation'">
+           ng-if="die.type==='relation' && displayMode!=='minimal'">
         <img src="{{getImageUrl(die)}}"/>
       </div>
     </div>
@@ -46,18 +46,34 @@
   </div>
 
   <div class="footer">
-    display modes:
-    <b>pose</b> |
-    <a href="{{baseURL}}/full">full</a> |
-    <a href="{{baseURL}}/minimal">minimal</a>
+    display:
+    <span ng-repeat="mode in DISPLAY_MODES">
+        <a ng-if="mode != displayMode" href="" ng-click="changeMode(mode)">{{mode}}</a>
+        <b ng-if="mode == displayMode">{{mode}}</b>
+        <span ng-if="!$last">|</span>
+    </span>
+    <br/>
+    combos:
+    <span ng-if="numTransitions == 1">
+        <b>less</b> |
+        <a href="" ng-click="changeNumTransitions(2)">more</a>
+    </span>
+    <span ng-if="numTransitions == 2">
+        <a href="" ng-click="changeNumTransitions(1)">less</a> |
+        <b>more</b>
+    </span>
   </div>
 
   <div class="footer">
+    <p>
     site by <a href="http://rfong.github.io">rfong</a>
     /
-    <a href="https://www.facebook.com/groups/109637431191/permalink/10154145560006192/">fan dice game</a> by <a href="https://www.etsy.com/shop/ForgedCreations">Becca Becker</a>
+    <a href="https://www.facebook.com/groups/109637431191/permalink/10154145560006192/">fan dice game</a> by Becca Becker
     /
     diagrams by <a href="https://www.facebook.com/groups/109637431191/permalink/10154930811256192/">Robin McPlurry</a>
+    </p>
+
+    <p><a href="{{baseURL}}/about">what's this?</a></p>
   </div>
 
 </body>
