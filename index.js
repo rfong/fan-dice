@@ -8,15 +8,7 @@ app.controller('FansCtrl', function($scope, $http) {
   $scope.dice = [];
   $scope.DISPLAY_MODES = ['pose', 'minimal'];
   $scope.displayMode = $scope.DISPLAY_MODES[0];
-
   $scope.numTransitions = 2;
-  $scope.getDiceTypes = function() {
-    return _.reduce(
-      _.map(_.range($scope.numTransitions), function(t) {
-          return ['relation', 'transition'] }),
-      function(a, b) { return a.concat(b); }, []).concat('relation')
-  }
-
   $scope.DICE_PARAMETERS = {
     // all must be unique
     relation: ['C', 'I', 'O', 'S', 'W', 'X'],
@@ -25,12 +17,18 @@ app.controller('FansCtrl', function($scope, $http) {
     num_poses: {C: 6, I: 4, O: 5, S: 6, W: 6, X: 6},
   };
 
+  $scope.getDiceTypes = function() {
+    // alternate relations and transitions
+    return _.reduce(
+      _.map(_.range($scope.numTransitions), function(t) {
+          return ['relation', 'transition'] }),
+      function(a, b) { return a.concat(b); }, []).concat('relation')
+  }
+
   $scope.getDieType = function(die_name) {
-    for (var die_type in $scope.DICE_PARAMETERS) {
-      if (_.contains($scope.DICE_PARAMETERS[die_type], die_name)) {
+    for (var die_type in $scope.DICE_PARAMETERS)
+      if (_.contains($scope.DICE_PARAMETERS[die_type], die_name))
         return die_type;
-      }
-    }
   };
 
   $scope.changeNumTransitions = function(n) {
@@ -41,6 +39,7 @@ app.controller('FansCtrl', function($scope, $http) {
     } else {
         $scope.shuffle();
     }
+    $scope.updateUrlParams();
   };
 
   $scope.changeMode = function(mode) {
@@ -91,6 +90,7 @@ app.controller('FansCtrl', function($scope, $http) {
     });
     window.urlparams.setUrlParams({
         mode: $scope.displayMode,
+        transitions: $scope.numTransitions,
         dice: dice_names.join(',')
     });
   };
@@ -100,6 +100,7 @@ app.controller('FansCtrl', function($scope, $http) {
     try {
       var params = window.urlparams.getUrlParams();
       $scope.displayMode = params.mode || $scope.DISPLAY_MODES[0];
+      $scope.numTransitions = params.transitions || 2;
     } catch (ex) {
       $scope.shuffle();
       return;
